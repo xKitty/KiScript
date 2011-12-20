@@ -16,10 +16,28 @@
 
 
 package IRC::XChat::KiScript;
-
+  
+my $PKG = __PACKAGE__;
 my $VERSION = "0.0";
-my $REVISION = "0001";
+my $REVISION = "0002";
 
-IRC::register ("KiScript", "r$REVISION", "", "");
+IRC::register("KiScript", "r$REVISION", "", "");
 
-IRC::print ("13Ki09Script Loaded (v$VERSION r$REVISION)");
+IRC::add_command_handler("TIME", "${PKG}::ctcptime");
+IRC::add_command_handler("FINGER", "${PKG}::ctcpfinger");
+
+sub ctcptime {
+	my $target = @_[0];
+	IRC::print("Sending CTCP TIME to $target");
+	IRC::send_raw("PRIVMSG $target :TIME");
+	return(1);
+}
+
+sub ctcpfinger {
+	my $target = @_[0];
+	IRC::print("Sending CTCP FINGER to $target");
+	IRC::send_raw("PRIVMSG $target :FINGER");
+	return(1);
+}
+
+IRC::print("13Ki09Script by 13Kitty Loaded (v$VERSION r$REVISION)");
