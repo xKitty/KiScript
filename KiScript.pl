@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 # KiScript (Kitty's XChat Script) - xKitty @ Github
 # - Main Script File
 #
@@ -16,7 +17,9 @@
 
 
 package IRC::XChat::KiScript;
-  
+
+use strict;
+use Xchat qw( :all );
 my $PKG = __PACKAGE__;
 my $VERSION = "0.0";
 my $REVISION = "0002";
